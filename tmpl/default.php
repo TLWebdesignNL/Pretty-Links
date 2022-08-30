@@ -11,7 +11,7 @@
 
 if (is_object($data)) :
 	?>
-    <div class="d-flex justify-content-center flex-wrap py-2">
+    <div class="d-flex justify-content-center align-items-center flex-wrap py-2">
 		<?php foreach ($data as $row) :
 			if ($row->text || $row->iconclass) :
 				?>
