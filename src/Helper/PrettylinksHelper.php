@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     Joomla.Site
  * @subpackage  mod_prettylinks
@@ -18,16 +19,16 @@ namespace TlwebNamespace\Module\Prettylinks\Site\Helper;
  */
 class PrettylinksHelper
 {
-	/**
-	 * Retrieve Prettybuttons test
-	 *
-	 * @param   Registry        $params  The module parameters
-	 * @param   CMSApplication  $app     The application
-	 *
-	 * @return  array
-	 */
-	public static function getText()
-	{
-		return 'PrettylinksHelpertest';
-	}
+    /**
+     * Retrieve Prettybuttons test
+     *
+     * @param   Registry        $params  The module parameters
+     * @param   CMSApplication  $app     The application
+     *
+     * @return  array
+     */
+    public static function getText()
+    {
+        return 'PrettylinksHelpertest';
+    }
 }
