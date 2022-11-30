@@ -41,57 +41,85 @@
                 />
             </fieldset>
             <fieldset name="prettylinks" label="MOD_PRETTYLINKS_FIELDSET_PRETTYLINKS">
-                <field
-                        name="prettylinks"
-                        type="subform"
-                        label="MOD_PRETTYLINKS_FIELD_PRETTYLINKS_LABEL"
-                        description="MOD_PRETTYLINKS_FIELD_PRETTYLINKS_DESC"
-                        multiple="true"
-                        min="1"
-                        max="99"
-                >
-                    <form>
-                        <field
-                                name="iconclass"
-                                type="text"
-                                label="MOD_PRETTYLINKS_FIELD_ICONCLASS_LABEL"
-                                hint="fas fa-home"
-                        />
-                        <field
-                                name="text"
-                                type="text"
-                                label="MOD_PRETTYLINKS_FIELD_TEXT_LABEL"
-                                hint="MOD_PRETTYLINKS_FIELD_TEXT_HINT"
-                        />
-                        <field
-                                name="url"
-                                type="text"
-                                label="MOD_PRETTYLINKS_FIELD_URL_LABEL"
-                                hint="MOD_PRETTYLINKS_FIELD_URL_HINT"
-                        />
-                        <field
-                                name="urltarget"
-                                type="list"
-                                default="_blank"
-                                required="true"
-                                label="MOD_PRETTYLINKS_FIELD_URLTARGET_LABEL"
-                                description="MOD_PRETTYLINKS_FIELD_URLTARGET_DESC"
-                        >
-                            <option value="_blank" checked="true">MOD_PRETTYLINKS_FIELD_URLTARGET_BLANK</option>
-                            <option value="_self">MOD_PRETTYLINKS_FIELD_URLTARGET_SELF</option>
-                        </field>
-                        <field
-                                name="hidemobile"
-                                type="radio"
-                                default="0"
-                                label="MOD_PRETTYLINKS_FIELD_HIDEMOBILE_LABEL"
-                                description="MOD_PRETTYLINKS_FIELD_HIDEMOBILE_DESC"
-                                class="btn-group btn-group-yesno">
-                            <option value="1">JYES</option>
-                            <option value="0">JNO</option>
-                        </field>
-                    </form>
-                </field>
+                <fieldset name="settings" label="MOD_PRETTYLINKS_FIELDSET_SETTINGS">
+                    <field
+                            name="vertical"
+                            type="radio"
+                            default="0"
+                            label="MOD_PRETTYLINKS_FIELD_VERTICAL_LABEL"
+                            description="MOD_PRETTYLINKS_FIELD_VERTICAL_DESC"
+                            class="btn-group btn-group-yesno">
+                        <option value="1">JYES</option>
+                        <option value="0">JNO</option>
+                    </field>
+                    <field
+                            name="linksposition"
+                            type="radio"
+                            default="center"
+                            label="MOD_PRETTYLINKS_FIELD_LINKSPOSITION_LABEL"
+                            description="MOD_PRETTYLINKS_FIELD_LINKSPOSITION_DESC"
+                            class="btn-group"
+                            required="true"
+                    >
+                        <option value="start">MOD_PRETTYLINKS_LEFT</option>
+                        <option value="center">MOD_PRETTYLINKS_CENTER</option>
+                        <option value="end">MOD_PRETTYLINKS_RIGHT</option>
+                    </field>
+
+                </fieldset>
+                <fieldset name="links" label="MOD_PRETTYLINKS_FIELDSET_LINKS">
+                    <field
+                            name="prettylinks"
+                            type="subform"
+                            label="MOD_PRETTYLINKS_FIELD_PRETTYLINKS_LABEL"
+                            description="MOD_PRETTYLINKS_FIELD_PRETTYLINKS_DESC"
+                            multiple="true"
+                            min="1"
+                            max="99"
+                    >
+                        <form>
+                            <field
+                                    name="iconclass"
+                                    type="text"
+                                    label="MOD_PRETTYLINKS_FIELD_ICONCLASS_LABEL"
+                                    hint="fas fa-home"
+                            />
+                            <field
+                                    name="text"
+                                    type="text"
+                                    label="MOD_PRETTYLINKS_FIELD_TEXT_LABEL"
+                                    hint="MOD_PRETTYLINKS_FIELD_TEXT_HINT"
+                            />
+                            <field
+                                    name="url"
+                                    type="text"
+                                    label="MOD_PRETTYLINKS_FIELD_URL_LABEL"
+                                    hint="MOD_PRETTYLINKS_FIELD_URL_HINT"
+                            />
+                            <field
+                                    name="urltarget"
+                                    type="list"
+                                    default="_blank"
+                                    required="true"
+                                    label="MOD_PRETTYLINKS_FIELD_URLTARGET_LABEL"
+                                    description="MOD_PRETTYLINKS_FIELD_URLTARGET_DESC"
+                            >
+                                <option value="_blank" checked="true">MOD_PRETTYLINKS_FIELD_URLTARGET_BLANK</option>
+                                <option value="_self">MOD_PRETTYLINKS_FIELD_URLTARGET_SELF</option>
+                            </field>
+                            <field
+                                    name="hidemobile"
+                                    type="radio"
+                                    default="0"
+                                    label="MOD_PRETTYLINKS_FIELD_HIDEMOBILE_LABEL"
+                                    description="MOD_PRETTYLINKS_FIELD_HIDEMOBILE_DESC"
+                                    class="btn-group btn-group-yesno">
+                                <option value="1">JYES</option>
+                                <option value="0">JNO</option>
+                            </field>
+                        </form>
+                    </field>
+                </fieldset>
             </fieldset>
             <fieldset name="advanced">
                 <field

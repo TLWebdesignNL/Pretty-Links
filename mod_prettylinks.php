@@ -14,5 +14,7 @@ use Joomla\CMS\Helper\ModuleHelper;
 use TlwebNamespace\Module\Prettylinks\Site\Helper\PrettylinksHelper;
 
 $data = $params->get('prettylinks');
+$verticalLayout = $params->get('vertical');
+$alignItems = $params->get('linksposition');
 
 require ModuleHelper::getLayoutPath('mod_prettylinks', $params->get('layout', 'default'));
