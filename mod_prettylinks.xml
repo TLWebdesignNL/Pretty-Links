@@ -93,7 +93,9 @@
                                     name="text"
                                     type="text"
                                     filter="string"
+                                    required="true"
                                     label="MOD_PRETTYLINKS_FIELD_TEXT_LABEL"
+                                    description="MOD_PRETTYLINKS_FIELD_TEXT_DESC"
                                     hint="MOD_PRETTYLINKS_FIELD_TEXT_HINT"
                             />
                             <field
@@ -109,14 +111,14 @@
                             <field
                                     name="urltarget"
                                     type="list"
-                                    default="_blank"
+                                    default="_self"
                                     required="true"
                                     filter="cmd"
                                     validate="options"
                                     label="MOD_PRETTYLINKS_FIELD_URLTARGET_LABEL"
                                     description="MOD_PRETTYLINKS_FIELD_URLTARGET_DESC"
                             >
-                                <option value="_blank" checked="true">MOD_PRETTYLINKS_FIELD_URLTARGET_BLANK</option>
+                                <option value="_blank">MOD_PRETTYLINKS_FIELD_URLTARGET_BLANK</option>
                                 <option value="_self">MOD_PRETTYLINKS_FIELD_URLTARGET_SELF</option>
                             </field>
                             <field

@@ -11,8 +11,11 @@
 // No direct access to this file
 \defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Log\Log;
+use Joomla\Database\DatabaseInterface;
+use Joomla\Registry\Registry;
 
 /**
  * Script file of Prettylinks module
@@ -113,6 +116,56 @@ class mod_prettylinksInstallerScript
     {
         echo Text::_('MOD_PRETTYLINKS_INSTALLERSCRIPT_POSTFLIGHT');
 
+        if ($type === 'update') {
+            $this->warnAboutIconOnlyLinks();
+        }
+
         return true;
+    }
+
+    /**
+     * Warn about modules with icon-only links: since 1.1.0 a link needs text for its accessible name,
+     * so these rows are rendered as an icon without a link until text is added.
+     *
+     * @return  void
+     */
+    private function warnAboutIconOnlyLinks(): void
+    {
+        try {
+            $db     = Factory::getContainer()->get(DatabaseInterface::class);
+            $module = 'mod_prettylinks';
+            $query  = $db->getQuery(true)
+                ->select($db->quoteName(['id', 'title', 'params']))
+                ->from($db->quoteName('#__modules'))
+                ->where($db->quoteName('module') . ' = :module')
+                ->where($db->quoteName('published') . ' != -2')
+                ->bind(':module', $module);
+
+            $affected = [];
+
+            foreach ($db->setQuery($query)->loadObjectList() as $item) {
+                $links = (new Registry($item->params))->get('prettylinks');
+
+                foreach ((array) $links as $link) {
+                    $link = (object) $link;
+
+                    if (trim((string) ($link->text ?? '')) === '' && trim((string) ($link->iconclass ?? '')) !== ''
+                        && trim((string) ($link->url ?? '')) !== '') {
+                        $affected[] = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8') . ' (ID ' . (int) $item->id . ')';
+                        break;
+                    }
+                }
+            }
+
+            if ($affected) {
+                Factory::getApplication()->enqueueMessage(
+                    Text::sprintf('MOD_PRETTYLINKS_INSTALLERSCRIPT_ICON_ONLY_WARNING', implode(', ', $affected)),
+                    'warning'
+                );
+            }
+        } catch (\Throwable $e) {
+            // The warning is informational only; never block the update because of it.
+            Log::add($e->getMessage(), Log::WARNING, 'jerror');
+        }
     }
 }
