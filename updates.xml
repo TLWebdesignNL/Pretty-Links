@@ -41,9 +41,9 @@
         <targetplatform name="joomla" version="4|5|6"/>
         <client>site</client>
     </update>
- <update>
+    <update>
         <name>Pretty Links 1.0.2</name>
-        <description/>
+        <description>Security fix: escapes link output and blocks javascript: URLs. Adds Joomla 6 support.</description>
         <element>mod_prettylinks</element>
         <type>module</type>
         <version>1.0.2</version>
@@ -58,6 +58,8 @@
         <sha256>d6713d5399c88f7290b0a35ecc4f1792c2f794ffd8d91fab6f36da0c6a94163e</sha256>
         <maintainer>TLWebdesign</maintainer>
         <maintainerurl>https://www.tlwebdesign.nl</maintainerurl>
+        <infourl title="Pretty Links changelog">https://github.com/TLWebdesignNL/Pretty-Links/blob/main/changelog.xml</infourl>
+        <changelogurl>https://raw.githubusercontent.com/TLWebdesignNL/Pretty-Links/main/changelog.xml</changelogurl>
         <section>Updates</section>
         <targetplatform name="joomla" version="4|5|6"/>
         <client>site</client>

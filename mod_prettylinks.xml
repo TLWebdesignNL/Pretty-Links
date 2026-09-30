@@ -6,8 +6,8 @@
     <authorEmail>info@tlwebdesign.nl</authorEmail>
     <authorUrl>https://tlwebdesign.nl</authorUrl>
     <copyright>TLWebdesign.nl</copyright>
-    <license>GNU General Public License version 3 or later; see LICENSE.txt</license>
-    <version>1.0.2</version>
+    <license>GNU General Public License version 3 or later; see LICENSE</license>
+    <version>1.1.0</version>
     <description>MOD_PRETTYLINKS_XML_DESCRIPTION</description>
     <scriptfile>script.php</scriptfile>
     <namespace path="src">TlwebNamespace\Module\Prettylinks</namespace>
@@ -87,6 +87,7 @@
                                     type="text"
                                     filter="string"
                                     label="MOD_PRETTYLINKS_FIELD_ICONCLASS_LABEL"
+                                    description="MOD_PRETTYLINKS_FIELD_ICONCLASS_DESC"
                                     hint="fas fa-home"
                             />
                             <field
@@ -106,6 +107,7 @@
                                     relative="true"
                                     schemes="http,https,mailto,tel"
                                     label="MOD_PRETTYLINKS_FIELD_URL_LABEL"
+                                    description="MOD_PRETTYLINKS_FIELD_URL_DESC"
                                     hint="MOD_PRETTYLINKS_FIELD_URL_HINT"
                             />
                             <field
@@ -184,6 +186,7 @@
             </fieldset>
         </fields>
     </config>
+    <changelogurl>https://raw.githubusercontent.com/TLWebdesignNL/Pretty-Links/main/changelog.xml</changelogurl>
     <updateservers>
         <server type="extension" priority="2" name="Pretty Links Updates">
             https://raw.githubusercontent.com/TLWebdesignNL/Pretty-Links/main/updates.xml

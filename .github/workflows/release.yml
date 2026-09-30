@@ -104,11 +104,19 @@ jobs:
                       new_block
                   )
 
-          # Detect indentation of the last block and match it
-          indent = re.match(r'(\s*)', last).group(1)
-          new_block = indent + new_block.lstrip()
+          # One-line description for the new release comes from .github/release-description
+          description = ""
+          if os.path.isfile(".github/release-description"):
+              description = open(".github/release-description").read().strip()
+          escaped = description.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+          new_block = re.sub(
+              r'<description\s*/>|<description>.*?</description>',
+              lambda m: f'<description>{escaped}</description>' if escaped else '<description/>',
+              new_block,
+              flags=re.DOTALL
+          )
 
-          content = content.replace('</updates>', new_block + '\n</updates>')
+          content = re.sub(r'\s*</updates>\s*$', lambda m: '\n    ' + new_block + '\n</updates>\n', content)
           with open("updates.xml", "w") as f:
               f.write(content)
           print(f"Added version {version} (sha256: {sha256})")

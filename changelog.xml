@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelogs>
+    <changelog>
+        <element>mod_prettylinks</element>
+        <type>module</type>
+        <version>1.1.0</version>
+        <note>
+            <item>Requires Joomla 5.4 or 6 and PHP 8.1 or later. Joomla 4 sites stay on 1.0.2.</item>
+            <item>Template overrides of the default layout must be updated: the layout now receives $links, $vertical, $position and $moduleclassSfx instead of $data, $verticalLayout and $alignItems.</item>
+            <item>Links with an icon but no text are shown without a link until text is added. After updating, a message lists the modules that need text.</item>
+        </note>
+        <addition>
+            <item>Links opening in a new window get rel="noopener noreferrer" and a note for screen readers.</item>
+            <item>Module class suffix is applied, and the list has a mod-prettylinks class.</item>
+            <item>Font Awesome is loaded through the Web Asset Manager when a link has an icon.</item>
+            <item>Field descriptions and a usage note in the module settings.</item>
+        </addition>
+        <change>
+            <item>Link text is required and stays available to screen readers when it is hidden on mobile.</item>
+            <item>New links open in the same window by default.</item>
+            <item>Links are rendered as a list (ul/li) with gap spacing.</item>
+            <item>Rebuilt on the Joomla 5/6 module structure: service provider, Dispatcher and helper.</item>
+        </change>
+        <language>
+            <item>Dutch spelling fixes and one module description for the installer and the module editor.</item>
+        </language>
+    </changelog>
+    <changelog>
+        <element>mod_prettylinks</element>
+        <type>module</type>
+        <version>1.0.2</version>
+        <security>
+            <item>Link text, URL and icon class are escaped on output (stored XSS).</item>
+            <item>Only relative, http, https, mailto and tel URLs are rendered as links; javascript: and other schemes are shown as text.</item>
+        </security>
+        <addition>
+            <item>Joomla 6 support in the update server.</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>mod_prettylinks</element>
+        <type>module</type>
+        <version>1.0.1</version>
+        <addition>
+            <item>Vertical layout and alignment options.</item>
+        </addition>
+    </changelog>
+    <changelog>
+        <element>mod_prettylinks</element>
+        <type>module</type>
+        <version>1.0.0</version>
+        <addition>
+            <item>Initial release.</item>
+        </addition>
+    </changelog>
+</changelogs>
