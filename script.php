@@ -8,115 +8,68 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// No direct access to this file
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Installer\InstallerAdapter;
+use Joomla\CMS\Installer\InstallerScriptInterface;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Log\Log;
 use Joomla\Database\DatabaseInterface;
+use Joomla\Filesystem\File;
 use Joomla\Registry\Registry;
 
-/**
- * Script file of Prettylinks module
- */
-class mod_prettylinksInstallerScript
-{
-    /**
-     * Extension script constructor.
-     *
-     * @return  void
-     */
-    public function __construct()
-    {
-        $this->minimumJoomla = '4.0';
-        $this->minimumPhp    = JOOMLA_MINIMUM_PHP;
-    }
+return new class () implements InstallerScriptInterface {
+    private const MINIMUM_JOOMLA = '5.4.0';
 
-    /**
-     * Method to install the extension
-     *
-     * @param   InstallerAdapter  $parent  The class calling this method
-     *
-     * @return  boolean  True on success
-     */
-    function install($parent)
+    private const MINIMUM_PHP = '8.1.0';
+
+    public function install(InstallerAdapter $adapter): bool
     {
         echo Text::_('MOD_PRETTYLINKS_INSTALLERSCRIPT_INSTALL');
 
         return true;
     }
 
-    /**
-     * Method to uninstall the extension
-     *
-     * @param   InstallerAdapter  $parent  The class calling this method
-     *
-     * @return  boolean  True on success
-     */
-    function uninstall($parent)
-    {
-        echo Text::_('MOD_PRETTYLINKS_INSTALLERSCRIPT_UNINSTALL');
-
-        return true;
-    }
-
-    /**
-     * Method to update the extension
-     *
-     * @param   InstallerAdapter  $parent  The class calling this method
-     *
-     * @return  boolean  True on success
-     */
-    function update($parent)
+    public function update(InstallerAdapter $adapter): bool
     {
         echo Text::_('MOD_PRETTYLINKS_INSTALLERSCRIPT_UPDATE');
 
         return true;
     }
 
-    /**
-     * Function called before extension installation/update/removal procedure commences
-     *
-     * @param   string            $type    The type of change (install, update or discover_install, not uninstall)
-     * @param   InstallerAdapter  $parent  The class calling this method
-     *
-     * @return  boolean  True on success
-     */
-    function preflight($type, $parent)
+    public function uninstall(InstallerAdapter $adapter): bool
     {
-        // Check for the minimum PHP version before continuing
-        if (!empty($this->minimumPhp) && version_compare(PHP_VERSION, $this->minimumPhp, '<')) {
-            Log::add(Text::sprintf('JLIB_INSTALLER_MINIMUM_PHP', $this->minimumPhp), Log::WARNING, 'jerror');
-
-            return false;
-        }
-
-        // Check for the minimum Joomla version before continuing
-        if (!empty($this->minimumJoomla) && version_compare(JVERSION, $this->minimumJoomla, '<')) {
-            Log::add(Text::sprintf('JLIB_INSTALLER_MINIMUM_JOOMLA', $this->minimumJoomla), Log::WARNING, 'jerror');
-
-            return false;
-        }
-
-        echo Text::_('MOD_PRETTYLINKS_INSTALLERSCRIPT_PREFLIGHT');
+        echo Text::_('MOD_PRETTYLINKS_INSTALLERSCRIPT_UNINSTALL');
 
         return true;
     }
 
-    /**
-     * Function called after extension installation/update/removal procedure commences
-     *
-     * @param   string            $type    The type of change (install, update or discover_install, not uninstall)
-     * @param   InstallerAdapter  $parent  The class calling this method
-     *
-     * @return  boolean  True on success
-     */
-    function postflight($type, $parent)
+    public function preflight(string $type, InstallerAdapter $adapter): bool
     {
-        echo Text::_('MOD_PRETTYLINKS_INSTALLERSCRIPT_POSTFLIGHT');
+        if ($type === 'uninstall') {
+            return true;
+        }
 
+        if (version_compare(PHP_VERSION, self::MINIMUM_PHP, '<')) {
+            Log::add(Text::sprintf('JLIB_INSTALLER_MINIMUM_PHP', self::MINIMUM_PHP), Log::WARNING, 'jerror');
+
+            return false;
+        }
+
+        if (version_compare(JVERSION, self::MINIMUM_JOOMLA, '<')) {
+            Log::add(Text::sprintf('JLIB_INSTALLER_MINIMUM_JOOMLA', self::MINIMUM_JOOMLA), Log::WARNING, 'jerror');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public function postflight(string $type, InstallerAdapter $adapter): bool
+    {
         if ($type === 'update') {
+            $this->removeLegacyEntryFile();
             $this->warnAboutIconOnlyLinks();
         }
 
@@ -124,10 +77,20 @@ class mod_prettylinksInstallerScript
     }
 
     /**
+     * 1.0.x used a mod_prettylinks.php entry file; since 1.1.0 the module boots from services/provider.php.
+     */
+    private function removeLegacyEntryFile(): void
+    {
+        $file = JPATH_SITE . '/modules/mod_prettylinks/mod_prettylinks.php';
+
+        if (is_file($file)) {
+            File::delete($file);
+        }
+    }
+
+    /**
      * Warn about modules with icon-only links: since 1.1.0 a link needs text for its accessible name,
      * so these rows are rendered as an icon without a link until text is added.
-     *
-     * @return  void
      */
     private function warnAboutIconOnlyLinks(): void
     {
@@ -168,4 +131,4 @@ class mod_prettylinksInstallerScript
             Log::add($e->getMessage(), Log::WARNING, 'jerror');
         }
     }
-}
+};

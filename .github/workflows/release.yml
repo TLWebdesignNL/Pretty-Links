@@ -94,6 +94,16 @@ jobs:
           # Update sha256
           new_block = re.sub(r'<sha256>[a-f0-9]+</sha256>', f'<sha256>{sha256}</sha256>', new_block)
 
+          # Target platform for new releases comes from .github/release-targetplatform (Joomla version regex)
+          if os.path.isfile(".github/release-targetplatform"):
+              platform = open(".github/release-targetplatform").read().strip()
+              if platform:
+                  new_block = re.sub(
+                      r'<targetplatform name="joomla" version="[^"]*"/>',
+                      lambda m: f'<targetplatform name="joomla" version="{platform}"/>',
+                      new_block
+                  )
+
           # Detect indentation of the last block and match it
           indent = re.match(r'(\s*)', last).group(1)
           new_block = indent + new_block.lstrip()

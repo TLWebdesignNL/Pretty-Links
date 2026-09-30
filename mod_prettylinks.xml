@@ -12,7 +12,7 @@
     <scriptfile>script.php</scriptfile>
     <namespace path="src">TlwebNamespace\Module\Prettylinks</namespace>
     <files>
-        <filename module="mod_prettylinks">mod_prettylinks.php</filename>
+        <folder module="mod_prettylinks">services</folder>
         <folder>tmpl</folder>
         <folder>src</folder>
         <folder>language</folder>
