@@ -41,4 +41,25 @@
         <targetplatform name="joomla" version="4|5|6"/>
         <client>site</client>
     </update>
- </updates>
+ <update>
+        <name>Pretty Links 1.0.2</name>
+        <description/>
+        <element>mod_prettylinks</element>
+        <type>module</type>
+        <version>1.0.2</version>
+        <downloads>
+            <downloadurl type="full" format="zip">
+                https://github.com/TLWebdesignNL/Pretty-Links/archive/refs/tags/V1.0.2.zip
+            </downloadurl>
+        </downloads>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <sha256>d6713d5399c88f7290b0a35ecc4f1792c2f794ffd8d91fab6f36da0c6a94163e</sha256>
+        <maintainer>TLWebdesign</maintainer>
+        <maintainerurl>https://www.tlwebdesign.nl</maintainerurl>
+        <section>Updates</section>
+        <targetplatform name="joomla" version="4|5|6"/>
+        <client>site</client>
+    </update>
+</updates>
